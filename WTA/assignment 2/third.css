@@ -1,0 +1,17 @@
+.container{
+	align-self: center;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-style: dotted dashed solid double;
+}
+h1{
+	background-color: yellow;
+}
+input{
+	background-color: #ffa500;
+}
+form{
+	margin: 20px;
+}

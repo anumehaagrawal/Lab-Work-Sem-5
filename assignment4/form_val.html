@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form validation</title>
+
+	<script type="text/javascript">
+		function validate(){
+			var fn=document.forms["myForm"]["fname"].value;
+			var ln = document.forms["myForm"]["lname"].value;
+			
+			if(fn.length >20 ){
+				
+				document.getElementById("fname_d").innerHTML = "Enter a shorter name!";
+
+				return false;
+			}
+			if(ln.length >20 ){
+				
+				document.getElementById("lname_d").innerHTML = "Enter a shorter last name!";
+
+				return false;
+			}
+			var x = document.forms["myForm"]["email"].value;
+			var atpos = x.indexOf("@");
+			var dotpos = x.lastIndexOf(".");
+			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+				document.getElementById("email_d").innerHTML="Set valid email id";
+			return false;
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<form method="post" name = "myForm" onsubmit="return validate()">
+		Firs Name <input type="text" name="fname" required><p id="fname_d"></p> <br>
+		Last Name <input type="text" name="lname" required><p id="lname_d"></p> <br>
+		Email address <input type="text" name="email" required> <p id="email_d"></p><br>
+		Gender
+		<input type="radio" name="gender" value="male" checked> Male<br>
+  		<input type="radio" name="gender" value="female"> Female<br>
+  		<textarea name="message" rows="10" cols="30" >
+		Enter Comments
+		</textarea>
+		<input type="submit" value="Submit form">
+	</form>
+	
+</body>
+<style type="text/css">
+	p{
+		color: red;
+	}
+</style>
+</html>

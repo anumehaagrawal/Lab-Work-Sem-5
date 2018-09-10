@@ -1,0 +1,16 @@
+div{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    font-family: "Times New Roman", Times, serif;
+}
+.com{
+	color: #551a8b;
+}
+.spo{
+	color: red;
+}
+.mid{
+	color: blue;
+}
