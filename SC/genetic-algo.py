@@ -6,6 +6,9 @@ import collections
 population=[]
 highest_accuracy=[]
 best_features=[]
+precision_array=[]
+recall_array=[]
+children=[]
 def priori(df):
 	count=0
 	c_out=0
@@ -89,16 +92,37 @@ def model_cv(features=None):
 			if(labels[i]==test[i][-1]):
 				c=c+1
 		accuracy=accuracy+ c/20*100
+		tn=0
+		fn=0
+		tp=0
+		fp=0
+		for i in range(len(test)):
+			if(labels[i]==0 and test[i][-1]==0):
+				tn=tn+1
+			elif(labels[i]==1 and test[i][-1]==1):
+				tp=tp+1
+			elif(labels[i]==1 and test[i][-1]==0):
+				fp=fp+1
+			else:
+				fn=fn+1
+		if(tp+fn !=0):
+			rec= tp/(tp+fn)
+			recall=recall+rec
+		if(tp+fp !=0):
+			prec = tp/(tp+fp)
+			preci=preci+prec
+		
 
-	return accuracy/count
+	return [accuracy/count,preci/count,recall/count]
 
 def initialize_features(num):
 	population.clear()
-	for j in range(9):
+	children.clear()
+	for j in range(30):
 		arr=[0]*num
 		n=randint(1, num-1)
 		for i in range(n):
-			index=randint(0,9)
+			index=randint(0,num-1)
 			arr[index]=1
 		population.append(arr)
 	return population	
@@ -114,14 +138,13 @@ def selection(population):
 def crossover(parents):
 	length = len(parents[0])
 	cross_over=randint(1,length-1)
-	children=[]
 	for i in range(cross_over,length):
 		temp=parents[0][i]
 		parents[0][i]=parents[1][i]
 		parents[1][i]=temp
 	children.append(parents[0])
 	children.append(parents[1])
-	return children
+	
 
 def mutation(children):
 	length = len(children[0])
@@ -136,15 +159,17 @@ def mutation(children):
 
 main_accuracy = model_cv()
 pop = initialize_features(22)
-for i in range(1000):
-	parents=selection(population)
-	child= crossover(parents)
-	mutation(child)
-
+for i in range(10):
+	for j in range(7):
+		parents=selection(population)
+		crossover(parents)
+	mutation(children)
 	accuracy_array=[]
 	for i in population:
 		acc = model_cv(i)
-		accuracy_array.append(acc)
+		precision_array.append(acc[1])
+		recall_array.append(acc[2])
+		accuracy_array.append(acc[0])
 	dict_pop={}
 	for i in range(len(accuracy_array)):
 		dict_pop[accuracy_array[i]]=population[i]
@@ -157,4 +182,7 @@ for i in range(1000):
 			best_features.append(value)		
 		i=i+1
 	
-print(highest_accuracy)
+highest_accuracy = sorted(highest_accuracy,reverse=True)
+print(highest_accuracy[0])
+precision_array = sorted(precision_array,reverse=True)
+print(precision_array[0])
