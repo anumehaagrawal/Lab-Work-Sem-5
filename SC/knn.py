@@ -13,7 +13,7 @@ def outcome(test,train,labels):
 	arr =sorted(arr,key=lambda x:x[0])
 	cz=0
 	co=0
-	for i in range(5):  # Set the value of k in knn
+	for i in range(9):  # Set the value of k in knn
 		if(arr[i][1]==0):
 			cz=cz+1
 		else:

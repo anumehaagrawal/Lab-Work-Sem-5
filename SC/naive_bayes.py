@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import  random
 from collections import defaultdict
 def priori(df):
 	count=0
@@ -62,6 +63,7 @@ accuracy =0
 recall=0
 preci=0
 count=0
+random.shuffle(df)
 for j in range(0,len(df)//20):
 	test=df[j*20:(j+1)*20]
 	train=df[0:j*20]+df[(j+1)*20:len(df)]
