@@ -1,0 +1,31 @@
+1. CREATE VIEW total_table AS SELECT ord_date,COUNT(DISTINCT customer_id),SUM(purch_amt),AVG(purch_amt) FROM orders GROUP BY ord_date;
+SELECT * FROM total_table;
+
+2.  CREATE VIEW nameorders AS SELECT ord_no, purch_amt, a.salesman, name, cust_name FROM orders a, customer b, salesman c WHERE a.customer_id = b.customer_id AND a.salesman = c.salesman_id;
+
+3. CREATE VIEW citymatch(custcity, salescity)
+AS SELECT DISTINCT a.city, b.city
+FROM customer a, salesman b
+WHERE a.salesman = b.salesman_id;
+
+4. CREATE VIEW mcustomer AS SELECT * FROM salesman WHERE 1 < (SELECT COUNT(*) FROM customer  WHERE salesman.salesman_id = customer.salesman);
+
+5.CREATE VIEW norders AS SELECT name, AVG(purch_amt), SUM(purch_amt) FROM salesman, orders WHERE salesman.salesman_id = orders.salesman GROUP BY name;
+
+CREATE TRIGGER Symm1 after INSERT ON Friend FOR EACH ROW BEGIN  INSERT INTO MutualFriend VALUES(NEW.ID2,NEW.ID1); INSERT INTO MutualFriend VALUES(NEW.ID1,NEW.ID2) ;END // 
+
+create trigger R2
+after delete on Friend
+for each row
+begin
+ delete from MutualFriend where ID1=Old.ID2 and ID2= Old.ID1;
+ delete from MutualFriend where ID1=OLD.ID1 and ID2=Old.ID2;
+end;
+
+ DELETE FROM Friend WHERE ID1='1689';
+
+ CREATE VIEW kids AS SELECT name, grade from Highschooler
+where ID not in (
+  select ID1 from Highschooler H1, Friend, Highschooler H2
+  where H1.ID = Friend.ID1 and Friend.ID2 = H2.ID and H1.grade <> H2.grade)
+order by grade, name;
