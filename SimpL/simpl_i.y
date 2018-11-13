@@ -14,7 +14,7 @@ int sym[26];                    /* symbol table */
 %token INTEGER
 %token VARIABLE
 %token STRING
-%token IF RETURN PRINT PRINTSTR PRINTNL THEN ENDIF ELSE NEWLINE COMMENT
+%token IF RETURN PRINT PRINTSTR PRINTNL THEN ENDIF ELSE NEWLINE COMMENT WHILE DO
 
 %nonassoc IFX
 %nonassoc ELSE
@@ -39,7 +39,8 @@ stmt_list:
 stmt:
         assign_stmt         
         | print_stmt        
-        | if_stmt           
+        | if_stmt  
+        | while_stmt        
         ;
 
 assign_stmt:
@@ -57,13 +58,27 @@ if_stmt:
                
         IF expr rule1 THEN stmt_list rule2 ELSE stmt_list ENDIF rule3 
         | IF expr rule1 THEN stmt_list ENDIF rule2  
+        
         ;
+while_stmt :
+        WHILE rule4 '(' expr ')' rule5 expr ';'rule6
+
+
+        ;
+
 rule1 : {lab3();}
         ;
 rule2 : {lab4();}
         ;
 rule3 : {lab5();}
         ;
+rule4 : {lab6();}
+        ;
+rule5 : {lab7();}
+        ;
+rule6 : {lab8();}
+        ;
+
 expr:
         INTEGER {push();}                 
         | VARIABLE  {push();}           
@@ -76,7 +91,8 @@ expr:
         | expr '<'{push();} expr{codegen();}       
         | expr '>'{push();} expr{codegen();}       
         | expr EQ {push();} expr{codegen();}          
-        | expr GE {push();} expr{codegen();}           
+        | expr GE {push();} expr{codegen();} 
+        | expr '=' {push();} expr{codegen();}          
         | expr NE {push();} expr{codegen();}          
         | expr LE {push();} expr{codegen();}           
         | '(' expr ')'          
@@ -90,10 +106,12 @@ char st[100][10];
 int top=0;
 char i_[2]="0";
 char temp[2]="t";
-
+int start =1 ;
 int label[20];
-int lnum=0;
+int lnum=1;
 int ltop=0;
+
+
 
 void yyerror(char *s) {
     extern yylineno;
@@ -198,3 +216,4 @@ int y;
 y=label[ltop--];
 printf("L%d: \n",y);
 }
+

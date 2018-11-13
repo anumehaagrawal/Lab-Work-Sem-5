@@ -14,6 +14,8 @@ void yyerror(char *);
 "newline"       return NEWLINE;
 "comment"		return COMMENT;
 "if"            return IF;
+"while"         return WHILE;
+"do"            return DO;
 "then"          return THEN;
 "else"          return ELSE;
 "endif"         return ENDIF;

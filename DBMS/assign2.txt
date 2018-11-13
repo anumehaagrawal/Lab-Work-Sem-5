@@ -1,0 +1,101 @@
+CREATE TRIGGER `total_grade` 
+BEFORE UPDATE 
+ON student_marks FOR EACH ROW
+BEGIN 
+SET NEW.TOTAL = NEW.sub1 + NEW.sub2 + NEW.sub3 + NEW.sub4 + NEW.sub5; 
+SET NEW.per_marks = NEW.TOTAL/5;
+IF NEW.per_marks >=90 THEN
+SET NEW.grade = 'EXC';
+ELSEIF NEW.per_marks>=75 AND NEW.per_marks<90 THEN
+SET NEW.grade = 'VG';
+ELSEIF NEW.per_marks>=60 AND NEW.per_marks<75 THEN
+SET NEW.grade = 'GOOD';
+ELSEIF NEW.per_marks>=40 AND NEW.per_marks<60 THEN
+SET NEW.grade = 'AVG';
+ELSE SET NEW.grade = 'NOTP';
+END IF;
+END;
+//
+
+UPDATE student_marks SET sub1 = 54, sub2 = 39, sub3 = 90, sub4 = 87,sub5=80 WHERE student_id=2;
+
+CREATE TRIGGER `after_insert` AFTER INSERT ON `blog` 
+FOR EACH ROW BEGIN
+IF NEW.deleted THEN
+SET @changetype = 'DELETE';
+ELSE SET @changetype = 'NEW';
+END IF; 
+INSERT INTO audit (blog_id, changetype) VALUES (NEW.id, @changetype);		
+END;
+
+INSERT INTO blog(id,title,content) VALUES (1,'Beans', 'Good beans');
+
+CREATE TRIGGER `after_update` AFTER UPDATE ON `blog` 
+FOR EACH ROW BEGIN
+IF NEW.deleted  THEN
+SET @changetype = 'DELETE';
+ELSE SET @changetype = 'EDIT';
+END IF; 
+INSERT INTO audit (blog_id, changetype) VALUES (NEW.id, @changetype);		
+END;
+
+
+
+UPDATE blog SET content = 'Edited text' WHERE id = 1;
+
+CREATE TRIGGER after_insert AFTER INSERT ON blog
+FOR EACH ROW BEGIN
+IF NEW.deleted THEN
+SET @changetype = 'DELETE';
+ELSE SET @changetype = 'NEW';
+END IF;
+INSERT INTO audit (blog_id, changetype) VALUES (NEW.id, @changetype);	
+END;
+
+
+
+
+delimiter //
+create procedure num_projects(IN id int)
+begin
+select ssn from employee where ssn=id;
+select count(works_on.pno) from works_on,employee where (works_on.essn=employee.ssn and employee.ssn=id);
+end//
+delimiter ;
+
+call num_projects(123456789);
+
+delimiter //
+create procedure above3500()
+begin
+select first_name,lname FROM employee WHERE salary>35000 ORDER BY first_name,last_name;
+end //
+
+create procedure above3500num(IN num INT)
+begin
+select first_name,last_name FROM employee WHERE salary>num ORDER BY first_name,last_name;
+end //
+delimiter ;
+
+delimiter //
+CREATE FUNCTION ufn_getslaary(salary int) RETURN VARCHAR(255)
+DETERMINISTIC
+BEGIN
+DECLARE to_return varchar(255);
+IF salary<3500 THEN
+SET to_return ='Low';
+ELSE I
+
+CREATE FUNCTION ufn_GetSalaryLevel(salary decimal(18, 4)) RETURNS VARCHAR(50)
+DETERMINISTIC
+BEGIN
+DECLARE to_return varchar(50);
+IF salary < 30000 THEN
+SET to_return = 'Low';
+ELSEIF (salary >= 30000 AND salary <= 50000) THEN
+SET to_return = 'Average';
+ELSEIF salary > 50000 THEN
+SET to_return = 'High';
+END IF;
+RETURN (to_return);
+END

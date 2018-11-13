@@ -3,7 +3,7 @@ print x;
 if (x > 5) then
 	print x * 5;
 endif
-if (x > 15) then print x; else print x+2; endif
+if (x > 15) then print "Hellox"; else print x+2; endif
 
 if (x == 10) then
 	print x*x*x; 
@@ -13,6 +13,6 @@ if (x != 1) then
 endif
 
 // This is a comment
-
+ while ( x > 10 ) x+1;
 print newline;
 var=30*50+2;

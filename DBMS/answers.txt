@@ -29,3 +29,133 @@ where ID not in (
   select ID1 from Highschooler H1, Friend, Highschooler H2
   where H1.ID = Friend.ID1 and Friend.ID2 = H2.ID and H1.grade <> H2.grade)
 order by grade, name;
+
+Sunitha Selvan
+	
+9:41 AM (11 minutes ago)
+	
+to me, Rosa
+
+
+---------- Forwarded message ---------
+From: Sanjay Shetty <sanjayshetty2015@gmail.com>
+Date: Fri, Nov 9, 2018 at 9:38 AM
+Subject: Fwd: DBMS
+To: Sunitha Selvan <sunitha98selvan@gmail.com>
+
+
+
+
+---------- Forwarded message ---------
+From: Yash Dodeja <ydodeja365@gmail.com>
+Date: Fri, Nov 9, 2018 at 9:14 AM
+Subject: Fwd: DBMS
+To: <sanjayshetty2015@gmail.com>, Srinag Rao S <srinagrao2007@gmail.com>, bharath raghunath <bharath.raghunath@gmail.com>, <16it113.gaurav@nitk.edu.in>, <divyammehta@yahoo.in>, suyash ghuge <suyashghuge@gmail.com>
+
+
+
+
+---------- Forwarded message ---------
+From: YASH DODEJA <yashdodeja@yahoo.com>
+Date: Fri, Nov 9, 2018 at 1:11 AM
+Subject: DBMS
+To: Yash Dodeja <ydodeja365@gmail.com>
+
+
+1..............
+DELIMITER $$
+CREATE TRIGGER `student_marks_BUPD`
+BEFORE UPDATE
+ON student_marks FOR EACH ROW
+-- Edit trigger body code below this line. Do not edit lines above this one
+BEGIN
+SET NEW.TOTAL = NEW.SUB1 + NEW.SUB2 + NEW.SUB3 + NEW.SUB4 + NEW.SUB5;
+SET NEW.PER_MARKS = NEW.TOTAL/5;
+IF NEW.PER_MARKS >=90 THEN
+SET NEW.GRADE = 'EXCELLENT';
+ELSEIF NEW.PER_MARKS>=75 AND NEW.PER_MARKS<90 THEN
+SET NEW.GRADE = 'VERY GOOD';
+ELSEIF NEW.PER_MARKS>=60 AND NEW.PER_MARKS<75 THEN
+SET NEW.GRADE = 'GOOD';
+ELSEIF NEW.PER_MARKS>=40 AND NEW.PER_MARKS<60 THEN
+SET NEW.GRADE = 'AVERAGE';
+ELSESET NEW.GRADE = 'NOT PROMOTED';
+END IF;
+END;
+$$
+2...............
+a)......
+CREATE
+    TRIGGER `blog_after_insert` AFTER INSERT
+    ON `blog`
+    FOR EACH ROW BEGIN
+    
+        IF NEW.deleted THEN
+            SET @changetype = 'DELETE';
+        ELSE
+            SET @changetype = 'NEW';
+        END IF;
+    
+        INSERT INTO audit (blog_id, changetype) VALUES (NEW.id, @changetype);
+        
+    END$$
+
+
+b).......
+DELIMITER $$
+
+CREATE
+    TRIGGER `blog_after_update` AFTER UPDATE
+    ON `blog`
+    FOR EACH ROW BEGIN
+    
+        IF NEW.deleted THEN
+            SET @changetype = 'DELETE';
+        ELSE
+            SET @changetype = 'EDIT';
+        END IF;
+    
+        INSERT INTO audit (blog_id, changetype) VALUES (NEW.id, @changetype);
+    
+    END$$
+
+3)...........
+SELECT name, grade
+FROM Highschooler H1
+WHERE ID NOT IN (
+  SELECT ID1
+  FROM Friend, Highschooler H2
+  WHERE H1.ID = Friend.ID1 AND H2.ID = Friend.ID2 AND H1.grade <> H2.grade
+)
+ORDER BY grade, name;
+
+4)...........
+CREATE PROCEDURE find_emp_projects @ide int
+AS
+BEGIN
+    SELECT a.Name, COUNT(b.project) AS NUM_OF_PROJECT
+    FROM EMPLOYEE a
+    INNER JOIN WORKS_ON b
+    ON a.id=b. idEmpl
+    WHERE a.ID = @ide
+    GROUP BY a.Name
+END
+
+DELIMITER ;
+
+
+5)
+CREATE FUNCTION ufn_GetSalaryLevel(salary decimal(18, 4)) RETURNS VARCHAR(50)
+DETERMINISTIC
+BEGIN
+DECLARE to_return varchar(50);
+IF salary < 30000 THEN
+SET to_return = 'Low';
+ELSEIF (salary >= 30000 AND salary <= 50000) THEN
+SET to_return = 'Average';
+ELSEIF salary > 50000 THEN
+SET to_return = 'High';
+END IF;
+RETURN (to_return);
+END
+
