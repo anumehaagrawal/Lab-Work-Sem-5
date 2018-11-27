@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="booklet">
+  <xs:complexType>
+    <xs:sequence>
+	<xs:element name="concert_ad">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="name" type="xs:string"/>
+	      <xs:element name="place" type="xs:string"/>
+	      <xs:element name="time" type="xs:string"/>
+	      <xs:element name="genre" type="xs:string"/>
+	      <xs:element name="description" type="xs:string"/>
+	      <xs:element name="price" type="xs:integer" />
+	      <xs:element name="seller" type="xs:string" />
+	      <xs:element name="month" type="xs:string"/>
+	      <xs:element name="discount" type="xs:string" />
+	    </xs:sequence>
+	  </xs:complexType>
+	</xs:element> 
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

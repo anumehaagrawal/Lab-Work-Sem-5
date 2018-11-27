@@ -1,0 +1,52 @@
+<?xml version ="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="data1.xsl"?>
+<booklet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="schema.xsd">
+	<concert_ad type="Pop" >
+		<name> Concert1 </name>
+		<place type="m"> Mangalore </place>
+		<time> 4th April, 5:30pm </time>
+		<genre> Pop </genre>
+		<description> ABC guitarist </description>
+		<price>190</price>
+		<seller> xyz </seller>
+		
+		<month type="a"> April </month>
+		<discount type= "no">No </discount>
+	</concert_ad>
+	<concert_ad type="Classical">
+		<name> Concert2 </name>
+		<place type="m"> Mangalore </place>
+		<time>3rd April ,5:30pm </time>
+		<genre> Classical </genre>
+		<description> ABC guitarist </description>
+		<price>108</price>
+		<seller> xyz </seller>
+	
+		<month type="a"> April </month>
+		<discount type= "yes"> Yes, 50% </discount>
+	</concert_ad>		
+	<concert_ad type="Instrumental">
+		<name> Concert3 </name>
+		<place type="m"> Mangalore </place>
+		<time>9th April, 5:30pm </time>
+		<genre> Instrumental </genre>
+		<description> ABC guitarist </description>
+		<price>101</price>
+		<seller> xyz </seller>
+
+		<month type="a"> April </month>
+		<discount type="yes"> Yes, 50% </discount>
+	</concert_ad>
+	<concert_ad type="Pop">
+		<name> Concert4 </name>
+		<place type="m"> Mangalore </place>
+		<time>9th May, 5:30pm </time>
+		<genre> Pop </genre>
+		<description> ABC guitarist </description>
+		<price>108</price>
+		<seller> xyz </seller>
+		<month type="m"> May </month>
+		<discount type="no">No </discount>
+	</concert_ad>
+</booklet>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function multiply(){
+			var v1 = document.getElementsByTagName("input");
+			console.log(parseInt(v1[0].value)*parseInt(v1[1].value));
+		}
+	</script>
+</head>
+<body>
+	<form name = "myForm" method="post">
+		Number 1 <input type="text" name="num1">
+		Number 2 <input type="text" name="num2">
+		<input type="submit" value="Multiply" onclick="multiply()">
+	</form>
+
+</body>
+</html>

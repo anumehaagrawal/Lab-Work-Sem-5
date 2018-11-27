@@ -1,0 +1,29 @@
+name,place
+{
+	
+	margin-right:9em;
+	color: blue;
+	font-weight: bold;
+
+}
+genre , price , description , seller , time ,month , discount{
+	display: block;
+}
+time{
+	color: blue;
+	font-weight: bold;
+}
+genre{
+	font-style: italic;
+	color: maroon;
+	margin-left: 10em;
+}
+description,price{
+	color: orange;
+	margin-left: 13em;
+}
+seller,discount,month{
+	font-weight: bold;
+	color: black;
+	margin-left: 10em;
+}
