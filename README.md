@@ -5,3 +5,4 @@ This repository consists of work done in the following subjects
 3. Parallel Computing
 4. Web Technologies and Applications
 5. Database management System
+6. Soft Computing
